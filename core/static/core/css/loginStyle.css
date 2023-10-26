@@ -1,0 +1,109 @@
+*{
+    box-sizing: border-box;
+}
+.form-signin{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 40% 60% ;;
+    padding: 1.5rem 3rem;
+    background-color: #202227;
+}
+.contentLogin{
+    padding: 0 9rem 0 6rem;
+}
+.contentLogoLogin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+}
+.contentLogoLogin h4 , figure{
+    margin: 0 1rem 0 0.2rem;
+
+}
+.contentWelcomeLogin{
+    height: 10rem;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+.input {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.form-label{
+     color: #696F79;
+     margin: 0.4rem 0;
+}
+.form-control{
+    width: 100%;
+    height: 3rem;
+    border-radius: 6px;
+    border: 0.5px solid #8692A6;
+    background: #282A2F;
+    color:  #8692A6;
+}
+.inputCheck:checked{
+    background-color: #5871EB;
+    border-color: darkblue; 
+}
+.contentViewPassword{
+    display:inline-block;
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 3rem;
+    right: 0.5rem;
+    cursor: pointer;
+}
+.btnSubmit {
+    background-color: #5871EB;
+    border: none;
+    width: 100%;
+    height: 3rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 2px;
+}
+.contentImgLogin{
+    border-radius: 1rem;
+    overflow: hidden;
+}
+.contentImgLogin figure{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.contentImgLogin figure img{
+    width: 100%;
+    height: 100%;
+}
+@media screen and (max-width: 1186px) {
+    .contentImgLogin{
+        display: none;
+    }
+    .form-signin{
+        display: inline-block;
+        width: 100%;
+        height: 100vh;
+    }
+    .contentLogin{
+        height: 100%;   
+    }
+    .contentLoginResponse{
+        width: 100%;
+        height: 100%;
+        display:grid;
+        justify-content: center;
+    }
+    .loginResponse{
+        max-width: 25rem;
+    }
+    .contentWelcomeLogin{
+        text-align: center;
+    }
+}

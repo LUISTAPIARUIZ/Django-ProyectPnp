@@ -1,0 +1,122 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+  <main class="contentRegisterEvents">
+      <aside class="RegisterEvents-TipesRegisters">
+        <p>Registros</p>
+        <ul class="TipeRegister-List">
+          <li class="ItemRegister">Registrar evento</li>
+          <li class="ItemRegister">Registrar Gremio</li>
+          <li class="ItemRegister">Registrar Persona</li>
+          <li class="ItemRegister">Registrar Cuadros</li>
+        </ul>
+      </aside>
+      <section class="RegisterEvent-Forms">
+        <div class="Content-FormMain">
+          <form class="FormMain" action="registrar/" method="POST">
+            <div class="FormMain-List">
+              <ul class="List-Fields">
+                <li  class="ItemFields">Aspecto</li>
+                <li  class="ItemFields">Ubicacion</li>
+                <li  class="ItemFields">Fecha</li>
+                <li  class="ItemFields">Organizacion</li>
+                <li  class="ItemFields">Dirigente</li>
+                <li  class="ItemFields">Tipo de medida</li>
+              </ul>
+            </div>
+            <div class=Main>
+              <div id="Aspect" class="Fields contentAspect">
+                <label>
+                  <input type="radio" name="opcion" value="opcion1"> Opción 1
+                </label><br>
+              <label>
+                  <input type="radio" name="opcion" value="opcion2"> Opción 2
+                </label><br>
+                <label>
+                  <input type="radio" name="opcion" value="opcion3"> Opción 3
+                </label><br>
+                <label>
+                  <input type="radio" name="opcion" value="opcion4"> Opción 4
+                </label><br>
+                <label>
+                  <input type="radio" name="opcion" value="opcion5"> Opción 5
+                </label><br>
+              </div>
+              <div id="Ubication" class="Fields contentUbication">
+                <label for="departamento">Departamento:</label>
+                <input type="text" id="departamento" name="departamento" placeholder="Ingresa el departamento">
+        
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" placeholder="Ingresa la provincia">
+
+                <label for="distrito">Distrito:</label>
+                <input type="text" id="distrito" name="distrito" placeholder="Ingresa el distrito">
+              </div>
+              <div id="Date" class="Fields contentFecha">
+                <label for="fecha_inicio">Fecha de inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio">
+    
+                <label for="fecha_termino">Fecha de término:</label>
+                <input type="date" id="fecha_termino" name="fecha_termino">
+              </div>
+              <div id="Organization" class="Fields contentOrganization">
+                AQUI LAS ORGANIZACIONES
+              </div>
+              <div id="Dirigent" class="Fields contentDirigent">
+                  AQUI LO DIRIGENTES
+              </div>
+              <div id="MeasurementType" class="Fields contentMeasurementType">
+                AQUI LAS MEDIDAS
+              </div>
+            </div>
+            <div class="Summary">
+              <p>Redumen del hecho</p>
+              <div class="containerSummary">
+                <textarea name="resumenSummary" class="resumenSummary"></textarea>
+                <div class="btnClear">Limpiar</div>
+              </div>
+            </div>
+            <button class="btnSubmitRegister" type="submit">Registrar</button>
+          </form>
+        </div>
+        <!-- <div class="">
+        <div class="">
+          <div class="">
+            <div class="">
+              <div class="">
+                <form action="registrar/" method="POST">
+                  {% csrf_token %}
+                  <div class="">
+                  <label for="">Roll</label>
+                  <input name="register_roll" type="text" id="roll" class="" placeholder="Enter your roll" required>
+                  </div>
+                  <div class="">
+                    <label for="name">Name</label>
+                    <input name="register_name" type="text" id="name" class="" placeholder="Enter your name" required>
+                  </div>
+                  <div class="">
+                    <label for="email">Email</label>
+                    <input name="register_email" type="text" id="email" class="" placeholder="Enter your email" required>
+                    </div>
+                    <div class="">
+                      <label for="address">Address</label>
+                      <textarea name="register_address" id="address" rows="4" class="" placeholder="Enter your address" required>
+                      </textarea>
+                    </div>
+                    <div class="">
+                      <label for="phone">Phone</label>
+                      <input name="register_phone" type="text" id="phone" class="" placeholder="Enter your phone" required>
+                    </div>
+                    <div class="">
+                      <button class="">
+                        Agregar Registro
+                      </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div> -->
+      </section>
+  </main>
+{% endblock %}

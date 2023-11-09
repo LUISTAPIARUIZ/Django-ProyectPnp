@@ -21,13 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                     if (response.message === 'Error en el formato') {
                         mostrarMensajeEmergente(response.message,"danger");
-                        formulario.reset();
                     }
                 }
                 if (xhr.readyState === 4 && xhr.status !== 200) {
                     // Manejar la respuesta del servidor
-                    mostrarMensajeEmergente("Ups! ocurrio un error","Erro de servidor");
-                    formulario.reset();
+                    mostrarMensajeEmergente("Up! ocurrio un error","Erro de servidor");
                 }
         };
 

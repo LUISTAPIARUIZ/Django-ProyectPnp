@@ -23,15 +23,15 @@ def RegisterGremio(request):
         nombre_presidente = request.POST['presidente']
         #validando los campos antes de ingresar a la BD
         def ValidarCampoVacioTexto(campo):
-            if campo.strip()=='':
+            if campo.replace(' ', '')=='':
                 return 'Vacio'
             return campo
         def ValidarCampoVacioDni(campo):
-            if campo.strip()=='':
+            if campo.replace(' ', '')=='':
                 return'00000000'
             return campo
         def ValidarCampoVacioRuc(campo):
-            if campo.strip()=='':
+            if campo.replace(' ', '')=='':
                 return'00000000000'
             return campo
         #Si algun campo de texto llega vacio lo completo como 'Vacio'
@@ -46,8 +46,8 @@ def RegisterGremio(request):
         dni_secretario_general=ValidarCampoVacioDni(dni_secretario_general)
 
         
-        if not nombre_gremio.strip().isalpha():
-            return JsonResponse({'message': 'Error en el formato'})
+        if not nombre_gremio.replace(' ', '').isalpha():
+            return JsonResponse({'message': 'Error en el formato 1'})
             
         if not ruc_gremio.isdigit() or len(ruc_gremio) != 11:
             return JsonResponse({'message': 'Error en el formato'})
@@ -55,19 +55,19 @@ def RegisterGremio(request):
         if not dni_secretario_general.isdigit() or len(dni_secretario_general) != 8:
             return JsonResponse({'message': 'Error en el formato'})
             
-        if not nombre_secretario_general.strip().isalpha():
+        if not nombre_secretario_general.replace(' ', '').isalpha():
             return JsonResponse({'message': 'Error en el formato'})
             
         if not dni_dirigente.isdigit() or len(dni_dirigente) != 8:
             return JsonResponse({'message': 'Error en el formato'})
             
-        if not nombre_dirigente.strip().isalpha():
+        if not nombre_dirigente.replace(' ', '').isalpha():
             return JsonResponse({'message': 'Error en el formato'})
             
         if not dni_presidente.isdigit() or len(dni_presidente) != 8:
             return JsonResponse({'message': 'Error en el formato'})
             
-        if not nombre_presidente.strip().isalpha():
+        if not nombre_presidente.replace(' ', '').isalpha():
             return JsonResponse({'message': 'Error en el formato'})
 
         nuevo_gremio = Gremio(

@@ -25,22 +25,21 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>SNO</th>
-                    <th>NAME</th>
-                    <th>EMAIL</th>
-                    <th>ADDRESS</th>
-                    <th>PHONE</th>
-                    <tr>
+                    <th>N°</th>
+                    <th>Ruc</th>
+                    <th>Secretario</th>
+                    <th>Diregente</th>
+                    <th>Presidente</th>
+                  <tr>
                       <thead>
                         <tbody>
-                          {% for r in register%}
+                          {% for r in gremio%}
                           <tr>
                             <td> {{forloop.counter}}</td>
-                            <td> {{r.roll}}</td>
-                            <td> {{r.name}}</td>
-                            <td> {{r.email}}</td>
-                            <td> {{r.address}}</td>
-                            <td> {{r.phone}}</td>
+                            <td> {{r.RUC_Gremio}}</td>
+                            <td> {{r.Nombre_Secretario_General}}</td>
+                            <td> {{r.Nombre_Dirigente}}</td>
+                            <td> {{r.Nombre_Presidente}}</td>
                           </tr>
                         {%endfor%}                       
                         </tbody>

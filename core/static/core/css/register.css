@@ -2,7 +2,7 @@
     width: 100%;
     height: calc(100vh - 7rem);
     display: grid;
-    grid-template-columns: 18rem auto;
+    grid-template-columns: 25% 75%;
     grid-template-rows: auto;
 }
 /*estilos del aside*/
@@ -36,12 +36,19 @@
     text-decoration: underline;
 }
 /* estilos de secction*/
-.RegisterEvent-Forms{
+.RegisterEvent-Forms,
+.RegisterGremio-Forms,
+.RegisterPerson-Forms,
+.RegisterCuadros-Forms{
     height: 100%;
     padding: 1.5rem;
 }
 .Content-FormMain{
     height: 100%;
+}
+.FormGremio{
+    display: grid;
+
 }
 .FormMain{
     width: 100%;
@@ -66,6 +73,7 @@
 
 .btnSubmitRegister{
     width: 5rem;
+    height: 2rem;
     border: none;
     background-color: #5A4CAF;
     color: white;
@@ -139,5 +147,72 @@
 .contentOrganization,
 .contentDirigent,
 .contentMeasurementType{
+    display: none;
+}
+.RegisterGremio-Forms,.RegisterPerson-Forms,.RegisterCuadros-Forms{
+    display: none;
+}
+/*estilos para gremios*/
+.contentPerson,
+.contentCuadros{
+    grid-area: 1/1/1/3;
+    display: flex;
+}
+.contentGremio{
+    padding: 4rem 0;
+    grid-area: 1/1/3/3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(1fr ,4);
+    margin-bottom: 1rem;
+}
+.FormMainGremio{
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contentGremio div{
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+}
+.contentGremio div input{
+    height: 2rem;
+    padding-left:0.5rem ;
+}
+/*Estilos para los mensajes emeregentes*/
+.message_alert{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: black;
+    text-align: center;
+    transition: 2s;
+    animation: slideIn 1s, slideOut 1s 2s;
+}
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.hide {
     display: none;
 }

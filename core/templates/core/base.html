@@ -3,6 +3,7 @@
 
 {% load static %}
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seguridad Nacional</title>
   <link href={% static 'core/css/bootstrap.min.css' %} rel="stylesheet">
   <!-- Custom styles for this template -->
@@ -10,6 +11,7 @@
   <link href={% static 'core/css/register.css' %} rel="stylesheet">
   <link href={% static 'core/css/home.css' %} rel="stylesheet">
   <script src={% static 'core/js/register.js' %} defer></script>
+  <script src={% static 'core/js/registerGremio.js' %} ></script>
   <script defer>
     function toggleInputType() {
             var passwordInput = document.getElementById('togglePassword');

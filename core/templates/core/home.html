@@ -5,9 +5,6 @@
   <main class="contentInicio">
 
     {% if request.user.is_authenticated %}
-
-      <p class="lead InicioUser">{% if request.user.is_authenticated %}Bienvenido, {{ user.username | upper }} {% endif %}</p>
-      
       <div class="container">
         <div class="search">
           <form action="" class="searchForm"> 
@@ -19,34 +16,33 @@
             </button>
           </form>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card-body">
+        <div class="contentTable">
+          <div class="table-responsive">
               <table class="table">
-                <thead>
-                  <tr>
-                    <th>N°</th>
-                    <th>Ruc</th>
-                    <th>Secretario</th>
-                    <th>Diregente</th>
-                    <th>Presidente</th>
-                  <tr>
-                      <thead>
-                        <tbody>
-                          {% for r in gremio%}
-                          <tr>
-                            <td> {{forloop.counter}}</td>
-                            <td> {{r.RUC_Gremio}}</td>
-                            <td> {{r.Nombre_Secretario_General}}</td>
-                            <td> {{r.Nombre_Dirigente}}</td>
-                            <td> {{r.Nombre_Presidente}}</td>
-                          </tr>
-                        {%endfor%}                       
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-        </div>
+                  <thead>
+                      <tr>
+                          <th>N°</th>
+                          <th>Ruc</th>
+                          <th>Secretario</th>
+                          <th>Dirigente</th>
+                          <th>Presidente</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for r in gremio %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ r.RUC_Gremio }}</td>
+                          <td>{{ r.Nombre_Secretario_General }}</td>
+                          <td>{{ r.Nombre_Dirigente }}</td>
+                          <td>{{ r.Nombre_Presidente }}</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      
       </div>
 
     {% else %}

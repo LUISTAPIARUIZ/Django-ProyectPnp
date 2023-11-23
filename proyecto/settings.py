@@ -94,6 +94,8 @@ DATABASES = {
     }
 }
 
+CSP_DEFAULT_SRC = ("'self'", "http://127.0.0.1:8000")
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

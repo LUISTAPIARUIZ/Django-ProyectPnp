@@ -6,56 +6,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seguridad Nacional</title>
   <link href={% static 'core/css/bootstrap.min.css' %} rel="stylesheet">
-  <!-- Custom styles for this template -->
   <link href={% static 'core/css/loginStyle.css' %} rel="stylesheet">
   <link href={% static 'core/css/register.css' %} rel="stylesheet">
   <link href={% static 'core/css/home.css' %} rel="stylesheet">
+  <link href={% static 'core/css/analize.css' %} rel="stylesheet">
   <script src={% static 'core/js/register.js' %} defer></script>
   <script src={% static 'core/js/registerGremio.js' %} ></script>
-  <script defer>
-    function toggleInputType() {
-            var passwordInput = document.getElementById('togglePassword');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-            } else {
-                passwordInput.type = 'password';
-            }
-        }
-</script>
 <link href={% static 'core/css/base.css' %} rel="stylesheet">
+<link href={% static 'core/css/barralateral.css' %} rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>        
 </head>
+<style>
+    body {
+        overflow-y: hidden;
+    }
+</style>
 
 <body>
-
 <div class="contentBase">
   {% if request.user.is_authenticated %}
-  <header class="header">
-    <div class="header-contentLogo">
-      <figure>
-        <img src={% static 'core/images/logoPnp.png' %} alt="" width="100" height="130">
-      </figure>
-      <h3 class="">Seguridad Nacional</h3>
-    </div>
-    <nav class="header-contentNav">
-        <a href={% url 'home' %}>Inicio</a>
-        <a href={% url 'register' %}>Registra reporte</a>
-        <a href={% url 'analize' %}>Fuentes </a> 
-        <a href={% url 'analize' %}>Power Bi </a> 
-        <a href={% url 'exit' %}>Cerrar Sesion</a>
-    </nav>
-    
-  </header>
-  {% else %}
+  <div class="sidebar">
+      <div class="logo-details">
+        <i>
+            <span class="logo_name">
+                <img src={% static 'core/images/logoPnp.png' %} alt="LogoPnp" width="30" height="30" style="vertical-align: middle;">
+                <label style="vertical-align: middle;">PNP</label>
+            </span>
+            <i class='bx bx-menu' id="btn"></i>
+        </i>
+      </div>
+      <ul class="nav-list">
+          <li>
+              <a href={% url 'home' %}>
+                  <i class='bx bx-home-alt-2'></i>
+                  <span class="links_name">Inicio</span>
+              </a>
+              <span class="tooltip">Inicio</span>
+          </li>
+          <li>
+              <a href={% url 'register' %}>
+                  <i class='bx bx-universal-access'></i>
+                  <span class="links_name">Registra reporte</span>
+              </a>
+              <span class="tooltip">Registra reporte</span>
+          </li>
+          <li>
+              <a href={% url 'analize' %}>
+                <i class='bx bxs-objects-vertical-bottom'></i>
+                  <span class="links_name">Fuentes</span>
+              </a>
+              <span class="tooltip">Fuentes</span>
+          </li>
+          <li>
+              <a href={% url 'analize' %}>
+                  <i class='bx bx-bar-chart-alt-2' ></i>
+                  <span class="links_name">Power Bi</span>
+              </a>
+              <span class="tooltip">Power Bi</span>
+          </li>
+          <style>
+              .nombre-usuario {
+                  color: white;
+                  font-size: 18px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  height: 100%;
+              }
+          </style>
+          <li class="profile">
+              <div class="profile-details">
+                  <div class="nombre-usuario">{% if request.user.is_authenticated %}{{ user.username | upper }} {% endif %}</div>
+              
+                  <div class="name_job">
+                      <a href={% url 'exit' %}>
+                          <i class='bx bx-log-out' id="log_out"></i>
+                      </a>
+                  </div>
+              </div>
+          </li>
+      </ul>
+  </div>
+  <section class="home-section">
         
-  {% endif %}
+  
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
 
-  {% block content %}{% endblock %}
-  {% if request.user.is_authenticated %}
+      closeBtn.addEventListener("click", () => {
+          sidebar.classList.toggle("open");
+          menuBtnChange();
+      });
 
-  {% else %}
-        
-  {% endif %}
+      searchBtn.addEventListener("click", () => {
+          sidebar.classList.toggle("open");
+          menuBtnChange(); 
+      });
+
+      function menuBtnChange() {
+          if (sidebar.classList.contains("open")) {
+              closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+          } else {
+              closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+          }
+      }
+    </script>
+    {% else %}
+          
+    {% endif %}
+
+    {% block content %}{% endblock %}
+    {% if request.user.is_authenticated %}
+
+    {% else %}
+          
+    {% endif %}
+  </section>
 </div>
   </body>
 </html>

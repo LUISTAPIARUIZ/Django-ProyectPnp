@@ -13,7 +13,7 @@
         <!--SECCION PARA EVENTO-->
         <section class="RegisterEvent-Forms" id="R-Events">
           <div class="Content-FormMain">
-            <form class="FormMain" action="registrar/" method="POST">
+            <form id="FormEvento" class="FormMain" action="registrarEvento/" method="POST">
               {% csrf_token %}
               <div class="FormMain-List">
                 <ul class="List-Fields">
@@ -21,60 +21,92 @@
                   <li  class="ItemFields">Ubicacion</li>
                   <li  class="ItemFields">Fecha</li>
                   <li  class="ItemFields">Organizacion</li>
-                  <li  class="ItemFields">Dirigente</li>
                   <li  class="ItemFields">Tipo de medida</li>
                 </ul>
               </div>
               <div class=Main>
                 <div id="Aspect" class="Fields contentAspect">
                   <label>
-                    <input type="radio" name="opcion" value="opcion1"> Opción 1
-                  </label><br>
-                <label>
-                    <input type="radio" name="opcion" value="opcion2"> Opción 2
+                    <input type="radio" name="opcion" value="Poblacional"> Poblacional
+                    </label><br>
+                  <label>
+                    <input type="radio" name="opcion" value="Campesinado"> Campesinado
                   </label><br>
                   <label>
-                    <input type="radio" name="opcion" value="opcion3"> Opción 3
+                    <input type="radio" name="opcion" value="Laboral">Laboral
                   </label><br>
                   <label>
-                    <input type="radio" name="opcion" value="opcion4"> Opción 4
+                    <input type="radio" name="opcion" value="Educacional"> Educacional
                   </label><br>
                   <label>
-                    <input type="radio" name="opcion" value="opcion5"> Opción 5
+                    <input type="radio" name="opcion" value="Mineria"> Mineria
                   </label><br>
                 </div>
                 <div id="Ubication" class="Fields contentUbication">
-                  <label for="departamento">Departamento:</label>
-                  <input type="text" id="departamento" name="departamento" placeholder="Ingresa el departamento">
-          
-                  <label for="provincia">Provincia:</label>
-                  <input type="text" id="provincia" name="provincia" placeholder="Ingresa la provincia">
+                  <label for="departamento">Nombre del Gremio:</label>
+                  <input 
+                      type="text" 
+                      id="departamento" 
+                      name="departamento"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresa el departamento" 
+                      required>
 
-                  <label for="distrito">Distrito:</label>
-                  <input type="text" id="distrito" name="distrito" placeholder="Ingresa el distrito">
+                  <label for="provincia">Nombre del Gremio:</label>
+                  <input 
+                      type="text" 
+                      id="provincia" 
+                      name="provincia"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresa la provincia" 
+                      required>
+                  <label for="distrito">Nombre del Gremio:</label>
+                  <input 
+                      type="text" 
+                      id="distrito" 
+                      name="distrito"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresa el distrito" 
+                      required>
                 </div>
                 <div id="Date" class="Fields contentFecha">
-                  <label for="fecha_inicio">Fecha de inicio:</label>
-                  <input type="date" id="fecha_inicio" name="fecha_inicio">
-      
-                  <label for="fecha_termino">Fecha de término:</label>
-                  <input type="date" id="fecha_termino" name="fecha_termino">
+                  <div>
+                    <label for="fecha_inicio">Fecha de inicio:</label>
+                    <input type="date" id="fecha_inicio" name="fecha_inicio">
+                  </div>
+                  <br>
+                  <div>
+                    <label for="fecha_termino">Fecha de término:</label>
+                    <input type="date" id="fecha_termino" name="fecha_termino">
+                </div>
                 </div>
                 <div id="Organization" class="Fields contentOrganization">
-                  AQUI LAS ORGANIZACIONES
-                </div>
-                <div id="Dirigent" class="Fields contentDirigent">
-                    AQUI LO DIRIGENTES
+                    <label for="nombreGremio">Nombre del Gremio:</label>
+                    <input 
+                      type="text" 
+                      id="nombreGremio" 
+                      name="nombreGremio"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresa el nombre" 
+                      required>
                 </div>
                 <div id="MeasurementType" class="Fields contentMeasurementType">
-                  AQUI LAS MEDIDAS
+                  <label for="medida">Tipo de medida:</label>
+                  <select id="medida" class="selectorMedida" name="medida" required>
+                    <option value="" disabled selected>Selecciona una medida</option>
+                    <option value="Concentracion">Concentracion</option>
+                    <option value="Mobilizacion">Mobilizacion</option>
+                    <option value="Paro">Paro</option>
+                    <option value="Personas">Personas</option>
+                    <!-- Agrega más opciones según sea necesario -->
+                  </select>
                 </div>
               </div>
               <div class="Summary">
                 <p>Resumen del hecho</p>
                 <div class="containerSummary">
-                  <textarea name="resumenSummary" class="resumenSummary"></textarea>
-                  <div class="btnClear">Limpiar</div>
+                  <textarea id="resumenSummary" name="resumenSummary" class="resumenSummary" ></textarea>
+                  <div id="btnClear" class="btnClear">Limpiar</div>
                 </div>
               </div>
               <button class="btnSubmitRegister" type="submit">Registrar</button>
@@ -168,19 +200,125 @@
             </form>
           </div>
         </section>
-        <!--SECCION PARA PERSONA-->
+        <!--SECCION PARA PERSONA--> 
         <section class="RegisterPerson-Forms" id="R-Person">
           <div class="Content-FormMain">
-            <form class="FormMain" action="registrar/" method="POST">
+            <form id="FormPersona" class="FormMainPersona" action="registrarPersona/" method="POST">
                 <div class="Fields contentPerson">
+                  <div >
+                    <label for="nombrePersona">Nombres:</label>
+                    <input 
+                      type="text" 
+                      id="nombrePersona" 
+                      name="nombrePersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresa el nombre" 
+                      required>
+                  </div>
+                  <div >
+                    <label for="apellidoPersona">Apellidos:</label>
+                    <input 
+                      type="text" 
+                      id="apellidoPersona" 
+                      name="apellidoPersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresa el apellido" 
+                      required>
+                  </div>
+                  <div >
+                    <label for="DNIPersona">DNI:</label>
+                    <input 
+                      type="text"
+                      id="DNIPersona" 
+                      name="DNIPersona" 
+                      pattern="[0-9]*" maxlength="8" minlength="8" 
+                      title="El número debe tener como máximo 8 dígitos" 
+                      placeholder="Ingresa el DNI"
+                      >
+                  </div>
+                  <div >
+                    <label for="FnacPersona">Fecha de nacimiento:</label>
+                    <input 
+                      type="date"
+                      id="FnacPersona" 
+                      name="FnacPersona"
+                      pattern="\d{4}-\d{2}-\d{2}"
+                      title="El formato debe ser YYYY-MM-DD"
+                      placeholder="Ingresar Fecha de nacimiento"
+                      >
+                  </div>
+                  <div >
+                    <label for="departamentoPersona">Departamento:</label>
+                    <input 
+                      type="text"
+                      id="departamentoPersona" 
+                      name="departamentoPersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresar el departamento"
+                      >
+                  </div>
+                  <div >
+                    <label for="provinciaPersona">Provincia:</label>
+                    <input 
+                      type="text"
+                      id="provinciaPersona" 
+                      name="provinciaPersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresar la provincia"
+                      >
+                  </div>
+                  <div >
+                    <label for="distritoPersona">Distrito:</label>
+                    <input 
+                      type="text"
+                      id="distritoPersona" 
+                      name="distritoPersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresar el distrito"
+                      >
+                  </div>
+                  <div >
+                    <p style="margin: 0;">Sexo</p>
+                    <div class="PeronaSexo">
+                      <label>
+                        <input type="radio" name="opcionSexo" value="M"> Masculino
+                      </label>
+                      <label>
+                        <input type="radio" name="opcionSexo" value="F"> Femenino
+                      </label>
+                    </div>
+                  </div>
+                  <div >
+                    <label for="domicilioPersona">Domicilio:</label>
+                    <input 
+                      type="text"
+                      id="domicilioPersona" 
+                      name="domicilioPersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresar el domicilio"
+                      >
+                  </div>
+                  <div >
+                    <label for="nompadrePersona">Nombre Padre:</label>
+                    <input 
+                      type="text"
+                      id="nompadrePersona" 
+                      name="nompadrePersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresar el nombre del padre"
+                      >
+                  </div>
+                  <div >
+                    <label for="nommadrePersona">Nombre Madre:</label>
+                    <input 
+                      type="text"
+                      id="nommadrePersona" 
+                      name="nommadrePersona"
+                      pattern="[A-Za-z\s]+" title="Solo se permiten letras" 
+                      placeholder="Ingresar el nombre de la madres"
+                      >
+                  </div>
                 </div>
-              <div class="Summary">
-                <p>Resumen del hecho</p>
-                <div class="containerSummary">
-                  <textarea name="resumenSummary" class="resumenSummary"></textarea>
-                  <div class="btnClear">Limpiar</div>
-                </div>
-              </div>
               <button class="btnSubmitRegister" type="submit">Registrar</button>
             </form>
           </div>

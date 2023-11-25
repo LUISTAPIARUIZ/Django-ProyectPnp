@@ -74,7 +74,6 @@ _ItemFields.forEach((elemento) => {
         ubicationDiv.style.display="none"
         dateDiv.style.display="none"
         organizationDiv.style.display="none"
-        dirigentDiv.style.display="none"
         measurementTypeDiv.style.display="none"
         break;
       case "Ubicacion":
@@ -82,7 +81,6 @@ _ItemFields.forEach((elemento) => {
         ubicationDiv.style.display="flex"
         dateDiv.style.display="none"
         organizationDiv.style.display="none"
-        dirigentDiv.style.display="none"
         measurementTypeDiv.style.display="none"
         break;
       case "Fecha":
@@ -90,7 +88,6 @@ _ItemFields.forEach((elemento) => {
         ubicationDiv.style.display="none"
         dateDiv.style.display="flex"
         organizationDiv.style.display="none"
-        dirigentDiv.style.display="none"
         measurementTypeDiv.style.display="none"
         break;
       case "Organizacion":
@@ -98,15 +95,6 @@ _ItemFields.forEach((elemento) => {
         ubicationDiv.style.display="none"
         dateDiv.style.display="none"
         organizationDiv.style.display="flex"
-        dirigentDiv.style.display="none"
-        measurementTypeDiv.style.display="none"
-        break;
-      case "Dirigente":
-        aspectDiv.style.display="none";
-        ubicationDiv.style.display="none"
-        dateDiv.style.display="none"
-        organizationDiv.style.display="none"
-        dirigentDiv.style.display="flex"
         measurementTypeDiv.style.display="none"
         break;
       case "Tipo de medida":
@@ -114,7 +102,6 @@ _ItemFields.forEach((elemento) => {
         ubicationDiv.style.display="none"
         dateDiv.style.display="none"
         organizationDiv.style.display="none"
-        dirigentDiv.style.display="none"
         measurementTypeDiv.style.display="flex"
         break;
       default:

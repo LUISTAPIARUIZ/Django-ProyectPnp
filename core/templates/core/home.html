@@ -29,13 +29,13 @@
                       </tr>
                   </thead>
                   <tbody>
-                      {% for r in gremio %}
+                      {% for r in persona %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ r.RUC_Gremio }}</td>
-                          <td>{{ r.Nombre_Secretario_General }}</td>
-                          <td>{{ r.Nombre_Dirigente }}</td>
-                          <td>{{ r.Nombre_Presidente }}</td>
+                          <td>{{ r.DNI }}</td>
+                          <td>{{ r.Fecha_Nacimiento }}</td>
+                          <td>{{ r.Sexo }}</td>
+                          <td>{{ r.Domicilio}}</td>
                       </tr>
                       {% endfor %}
                   </tbody>

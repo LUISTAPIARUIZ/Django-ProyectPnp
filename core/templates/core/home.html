@@ -6,9 +6,12 @@
 
     {% if request.user.is_authenticated %}
       <div class="container">
+        
         <div class="search">
-          <form action="" class="searchForm"> 
-            <input type="text" class="inputSearch" placeholder="BUSCAR">
+          <form action="buscar/" id="buscador" class="searchForm">
+            {% csrf_token %}
+            <input id="OpcionSearch" name="opcionBuscar" type="hidden" value="Evento">
+            <input type="text" name="textBuscar" class="inputSearch" placeholder="BUSCAR">
             <button type="submit" class="btnSearch">
               <figure>
                 <img src={% static 'core/images/lupa.png' %} alt="">
@@ -18,37 +21,21 @@
         </div>
         <div class="Optionsearch">
           <div>
-            <button id="btnBuscarEvento" onclick="BuscarEvento()">Evento</button>
+            <button class="optionBtnSearch" id="btnBuscarEvento" >Evento</button>
           </div>
           <div>
-            <button id="btnBuscarGremio" onclick="BuscarGremio()">Gremio</button>
+            <button class="optionBtnSearch" id="btnBuscarGremio" >Gremio</button>
           </div>
           <div>
-            <button id="btnBuscarPersona" onclick="BuascarPersona()">Persona</button>
+            <button class="optionBtnSearch" id="btnBuscarPersona" >Persona</button>
           </div>
         </div>
         <div class="contentTable">
           <div class="table-responsive">
               <table class="table">
-                  <thead>
-                      <tr>
-                          <th>N°</th>
-                          <th>Ruc</th>
-                          <th>Secretario</th>
-                          <th>Dirigente</th>
-                          <th>Presidente</th>
-                      </tr>
+                  <thead id="head">
                   </thead>
-                  <tbody>
-                      {% for r in persona %}
-                      <tr>
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ r.DNI }}</td>
-                          <td>{{ r.Fecha_Nacimiento }}</td>
-                          <td>{{ r.Sexo }}</td>
-                          <td>{{ r.Domicilio}}</td>
-                      </tr>
-                      {% endfor %}
+                  <tbody id="body" >
                   </tbody>
               </table>
           </div>

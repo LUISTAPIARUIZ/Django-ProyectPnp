@@ -3,12 +3,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from .models import Gremio, Persona , Evento
+from django.db.models import Q
+from django.core.serializers.json import DjangoJSONEncoder
 import re
 
 
 # Create your views here.
 @login_required
-
+def obtenerGremio(request):
+    gremio = Gremio.objects.all().values()  # Convertir el queryset a una lista de diccionarios
+    opcion = 'gremio'
+    return JsonResponse({"registro": list(gremio), "Opcion": opcion}, encoder=DjangoJSONEncoder)
+def obtenerPersona(request):
+    persona = Persona.objects.all().values()  # Convertir el queryset a una lista de diccionarios
+    opcion = 'persona'
+    return JsonResponse({"registro": list(persona), "Opcion": opcion}, encoder=DjangoJSONEncoder)
+def obtenerEvento(request):
+    evento = Evento.objects.all().values()  # Convertir el queryset a una lista de diccionarios
+    opcion = 'evento'
+    return JsonResponse({"registro": list(evento), "Opcion": opcion}, encoder=DjangoJSONEncoder)
 def home(request):
     persona=Persona.objects.all()
 
@@ -71,6 +84,115 @@ def RegisterPersona(request):
         nuevo_Persona.save()
         return JsonResponse({'message': 'Registro exitoso'})
     return JsonResponse({})
+
+
+def buscar(request):
+    if request.method=='POST':
+        opcionBuscar= request.POST.get('opcionBuscar', '')
+        textBuscar = request.POST.get('textBuscar', '')
+        #Si algun campo de texto llega vacio lo completo como 'Vacio'
+        opcionBuscar=ValidarCampoVacioTexto(opcionBuscar)
+        textBuscar=ValidarCampoVacioTexto(textBuscar)
+        #validacion de formato
+        if  not opcionBuscar.replace(' ', '').isalpha() or \
+            not textBuscar.replace(' ', '').isalnum():
+            return JsonResponse({'message': 'Error algo salio mal'})
+        
+        if(opcionBuscar=='Gremio'):
+            resultados = Gremio.objects.filter(
+                Q(Nombre_Gremio__icontains=textBuscar) |
+                Q(RUC_Gremio__icontains=textBuscar) |
+                Q(Nombre_Presidente__icontains=textBuscar) |
+                Q(DNI_Presidente__icontains=textBuscar) |
+                Q(Nombre_Secretario_General__icontains=textBuscar) |
+                Q(DNI_Secretario_General__icontains=textBuscar) |
+                Q(Nombre_Dirigente__icontains=textBuscar) |
+                Q(DNI_Dirigente__icontains=textBuscar)
+            )
+
+            # Convertir los resultados a una lista de diccionarios
+            resultados_serializados = [
+                {
+                    'Id': resultado.Id,
+                    'Nombre_Gremio': resultado.Nombre_Gremio,
+                    'RUC_Gremio': resultado.RUC_Gremio,
+                    'DNI_Secretario_General': resultado.DNI_Secretario_General,
+                    'Nombre_Secretario_General': resultado.Nombre_Secretario_General,
+                    'DNI_Dirigente': resultado.DNI_Dirigente,
+                    'Nombre_Dirigente': resultado.Nombre_Dirigente,
+                    'DNI_Presidente': resultado.DNI_Presidente,
+                    'Nombre_Presidente': resultado.Nombre_Presidente,
+                    'Foto_Gremio': resultado.Foto_Gremio,
+                }
+                for resultado in resultados
+            ]
+            return JsonResponse({'resultados': resultados_serializados, 'opcion': 'Gremio'})
+        if(opcionBuscar=='Evento'):
+            resultados = Evento.objects.filter(
+                Q(nombreGremio__icontains=textBuscar) |
+                Q(resumenSummary__icontains=textBuscar) |
+                Q(departamento__icontains=textBuscar) |
+                Q(provincia__icontains=textBuscar) |
+                Q(distrito__icontains=textBuscar) |
+                Q(fecha_inicio__icontains=textBuscar) |
+                Q(fecha_termino__icontains=textBuscar) |
+                Q(opcion__icontains=textBuscar) |
+                Q(medida__icontains=textBuscar)
+            )
+
+            # Convertir los resultados a una lista de diccionarios
+            resultados_serializados = [
+                {
+                    'id': resultado.id,
+                    'opcion': resultado.opcion,
+                    'departamento': resultado.departamento,
+                    'provincia': resultado.provincia,
+                    'distrito': resultado.distrito,
+                    'fecha_inicio': resultado.fecha_inicio,
+                    'fecha_termino': resultado.fecha_termino,
+                    'nombreGremio': resultado.nombreGremio,
+                    'medida': resultado.medida,
+                    'resumenSummary': resultado.resumenSummary,
+                }
+                for resultado in resultados
+            ]    
+            return JsonResponse({'resultados': resultados_serializados, 'opcion': 'Evento'})
+        if(opcionBuscar=='Persona'):
+            resultados = Persona.objects.filter(
+                Q(Apellido__icontains=textBuscar) |
+                Q(DNI__icontains=textBuscar) |
+                Q(Departamento__icontains=textBuscar) |
+                Q(Distrito__icontains=textBuscar) |
+                Q(Domicilio__icontains=textBuscar) |
+                Q(Fecha_Nacimiento__icontains=textBuscar) |
+                Q(Nombre__icontains=textBuscar) |
+                Q(Nombre_Madre__icontains=textBuscar) |
+                Q(Nombre_Padre__icontains=textBuscar) |
+                Q(Provincia__icontains=textBuscar) |
+                Q(Sexo__icontains=textBuscar)
+            )
+             # Convertir los resultados a una lista de diccionarios
+            resultados_serializados = [
+                {
+                    'id': resultado.id,
+                    'DNI': resultado.DNI,
+                    'Nombre': resultado.Nombre,
+                    'Apellido': resultado.Apellido,
+                    'Fecha_Nacimiento': resultado.Fecha_Nacimiento,
+                    'Departamento': resultado.Departamento,
+                    'Provincia': resultado.Provincia,
+                    'Distrito': resultado.Distrito,
+                    'Sexo': resultado.Sexo,
+                    'Domicilio': resultado.Domicilio,
+                    'Nombre_Padre': resultado.Nombre_Padre,
+                    'Nombre_Madre': resultado.Nombre_Madre,
+                    'Foto_Persona': resultado.Foto_Persona,
+                }
+                for resultado in resultados
+            ]
+            return JsonResponse({'resultados': resultados_serializados, 'opcion': 'Persona'})
+    return JsonResponse({})
+
 
 def RegisterEvento(request):
     if request.method=='POST':

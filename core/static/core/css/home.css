@@ -40,3 +40,20 @@
 .contentTable{
     width: 100%;
 }
+.Optionsearch{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+}.Optionsearch div{
+    padding-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+.optionBtnSearch{
+    padding: 0.5rem 1rem;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border-radius: 15px;
+    border: solid rgb(146, 145, 145) 1px;
+}
